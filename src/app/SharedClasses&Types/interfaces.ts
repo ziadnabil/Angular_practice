@@ -1,4 +1,4 @@
-interface IProduct {
+export interface IProduct {
     ID?: number;
     Name?: string;
     Quantity?: number;
@@ -6,7 +6,7 @@ interface IProduct {
     Img?: string;
   }
 
-interface ICategory {
+export interface ICategory {
   ID?: number;
   Name?: string;
 }
