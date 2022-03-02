@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DiscountOffers } from '../SharedClasses&Types/enums';
 import { ICategory, IProduct } from '../SharedClasses&Types/interfaces';
+// import { Observable } from 'rxjs/Observable';
+// import { HttpClient } from '@angular/common/http';
+
 // import {  } from '../SharedClasses&Types/interfaces';
 
 @Component({
@@ -16,10 +19,11 @@ export class ProductsComponent implements OnInit {
   CategoryList : ICategory[];
   ClientName:string;
   isPurchased:boolean ;
-  
+  isAvail:boolean = true;
+
   constructor() {
     this.Discount = DiscountOffers['10%'] ;
-    this.StoreName = "XSHOP";
+    this.StoreName = "Xshop";
     this.StoreLogo = "../../assets/logo.jpg";
     this.ProductList = [
       {ID:1, Name:'', Quantity:10, Price:15000, Img:''},
@@ -33,9 +37,22 @@ export class ProductsComponent implements OnInit {
     ];
     this.ClientName = "ahmed";
     this.isPurchased = true;
+
+    
    }
 
   ngOnInit(): void {
   }
+
+  // delete(product: IProduct): Observable<IProduct> {
+  //   return this._http.delete(`${this._endPoint}/${product.ID}`)
+  //   .mapTo(product);
+  //   // return this.http.get<IProduct[]>(this.url)
+  // }
+  buy():void{
+    if(this.isPurchased) this.isPurchased = false;
+    else this.isPurchased = true;
+  }
+
 
 }

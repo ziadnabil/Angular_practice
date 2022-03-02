@@ -1,5 +1,52 @@
-<h1> {{StoreName}} </h1>
+<h1> {{StoreName | uppercase}} </h1>
 
 <img style="width: 100px; height: 100px;" [src]="StoreLogo">
 
-<h3> We offer an explicit discount of: {{Discount}} </h3>
+<h3 *ngIf="isAvail"> We offer an explicit discount of: {{Discount*0.1 | percent}} </h3>
+
+<div *ngFor="let item of ProductList">
+    {{item.ID}}
+    {{item.Name}}
+    {{item.Quantity}}
+    {{item.Price}}
+</div>
+<br>
+<br>
+<ng-template [ngIf]="isPurchased" [ngIfElse]="purchasing">
+  <div>
+    <h6 class="pb-2 mb-0">Products</h6>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">NAME</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Price</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of ProductList">
+          <td>{{item.ID}}</td>
+          <td>{{item?.Name}}</td>
+          <td>{{item.Quantity}}</td>
+          <td>{{item.Price}}</td>          
+        </tr>
+        <!-- <tr *ngIf="loading">
+         <td colspan="5" align="center">Fetching Employees</td>
+        </tr> -->
+      </tbody>
+    </table>
+</div>
+</ng-template>
+
+<ng-template #purchasing>
+  <div>Thanks for purchasing from our Store {{ClientName}}</div>
+</ng-template>
+<br>
+<br>
+<button (click)="buy()">BUY</button>
+<br>
+<br>
+<input type="text" [(ngModel)]="ClientName" />
+<div>ClientName : {{ClientName}}</div>
